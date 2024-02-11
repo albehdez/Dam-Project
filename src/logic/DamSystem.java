@@ -10,10 +10,16 @@ public class DamSystem {
     private static DamSystem instance;
     private ArrayList<Formula> formList = new ArrayList<Formula>();
     private File formulasFile;
+
+    public File getFormulasFile() {
+        return formulasFile;
+    }
+
     private File resultsFile;
 
     private DamSystem() {
         this.formList = new ArrayList<Formula>();
+     formulasFile= new File("Formulas.csv");
     }
 
     public static DamSystem getInstance(){

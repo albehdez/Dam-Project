@@ -3,6 +3,7 @@ package util;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import logic.DamSystem;
 import logic.Formula;
@@ -30,8 +31,14 @@ try {
             line.append(f.getFunction());
             line.append(space);
             for (Variable variable : formulas.get(i).getVariables()) {
-                line.append(variable.getName() + " " + variable.getNomenclature());
+                line.append(variable.getName());
                 line.append(space);
+                line.append(variable.getNomenclature());
+                line.append(space);
+                line.append(variable.getDescription());
+                line.append(space);
+                //line.append(variable.getName() + " " + variable.getNomenclature()+ " " + variable.getDescription());
+                //line.append(space);
                 fileWriter.write(line.toString());
                 line.delete(0, line.length());
             }
@@ -44,5 +51,83 @@ try {
 }
 
     }
+
+    public static ArrayList<Formula> CargandoFormulas(File formulasFile) {
+            //ArrayList<Formula> formulas =  DamSystem.getInstance().getFormList();
+            ArrayList<Formula> formulas =  new ArrayList<Formula> ();
+            ArrayList<Variable> variables = new ArrayList<Variable> ();
+            try {
+                
+                Scanner scanner = new Scanner(formulasFile);
+                scanner.nextLine(); // Saltar la primera línea que contiene los encabezados
+                Formula f = null;
+                while (scanner.hasNextLine()) {
+                    String linea = scanner.nextLine();
+                    String[] valores = linea.split(";"); // Separar los valores de la línea utilizando el separador ";"	
+                    for(int i=2;i<valores.length;i++) {
+                       // if (variableDetails.length == 3) {
+                                            String name = valores[i].trim();
+                                            String nomenclature = valores[i+=1].trim();
+                                            String description = valores[i+=1].trim();
+                                            
+                                             // Create a new Variable object and add it to the Formula
+                            Variable variable = new Variable(name,nomenclature,description);
+                                  
+                            variables.add(variable);
+                                    //}
+                                    
+                                                }
+                                                 f = new Formula(valores [0], valores[1], variables);
+                                                formulas.add(f);
+                                                
+                                            }scanner.close();
+                                        }catch (Exception e) {
+                                                System.out.println("No se pudo cargar el archivo");
+                                            }
+                                            
+                                            return formulas;
+                                        }
+          
+
+    /*public static ArrayList<Formula> CargandoFormulas(File formulasFile) {
+		ArrayList<Formula> formulas = new ArrayList<Formula>();
+		try {
+			
+			Scanner scanner = new Scanner(formulasFile);
+			scanner.nextLine(); // Saltar la primera línea que contiene los encabezados
+			Formula f = null;
+			while (scanner.hasNextLine()) {
+				String linea = scanner.nextLine();
+				String[] valores = linea.split(";"); // Separar los valores de la línea utilizando el separador ";"
+				f = new Formula(valores [0], valores[1]);	
+				for(int i=2;i<valores.length;i++) {
+                    String[] variableDetails = valores[i].split(",");
+                   //esto es para cuando integre los max y min
+                    if (variableDetails.length == 4) {
+                        String name = variableDetails[0].trim();
+                        double coefficient = Double.parseDouble(variableDetails[1].trim());
+                        double minValue = Double.parseDouble(variableDetails[2].trim());
+                        double maxValue = Double.parseDouble(variableDetails[3].trim());
+                         // Create a new Variable object and add it to the Formula
+        Variable variable = new Variable(name, coefficient, minValue, maxValue);
+               f.getVariables().add(variable);
+				}//
+                if (variableDetails.length == 3) {
+                    String name = variableDetails[0].trim();
+                    String nomenclature = variableDetails[1].trim();
+                    String description = variableDetails[2].trim();
+                    
+                     // Create a new Variable object and add it to the Formula
+    Variable variable = new Variable(name,nomenclature,description);
+           f.getVariables().add(variable);
+            }
+				formulas.add(f);
+			}
+			scanner.close();
+		}}catch (Exception e) {
+			System.out.println("No se pudo cargar el archivo");
+		}
+		return formulas;
+	} */
     
 }

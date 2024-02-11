@@ -13,12 +13,12 @@ public class Formula {
     private String name;
     private String function;
 	private JEP parsed;
-	private ArrayList<Variable> variables = new ArrayList<Variable>();
+	private ArrayList<Variable> variables =new ArrayList<Variable>(); ;
     
     public Formula(String name, String function, ArrayList<Variable> variables) {
         this.name = name;
         this.function = function;
-        this.variables = variables;
+        this.variables = variables; 
         parsed = new JEP();
         parsed.addStandardFunctions();
         parsed.addStandardConstants();
