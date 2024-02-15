@@ -22,6 +22,8 @@ for (Formula formula : formulas) {
         System.out.println(variabless.getName());
         System.out.println(variabless.getNomenclature());
         System.out.println(variabless.getDescription());
+        System.out.println(variabless.getDownLimit());
+        System.out.println(variabless.getUpLimit());
     }
    
 }

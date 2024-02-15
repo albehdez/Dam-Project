@@ -53,6 +53,7 @@ try {
 
     }
 
+   
     public static ArrayList<Formula> CargandoFormulas(File formulasFile) {
             ArrayList<Formula> formulas =  new ArrayList<Formula> ();
             ArrayList<Variable> variables = new ArrayList<Variable> ();
@@ -68,10 +69,11 @@ try {
                      String name = valores[i].trim();
                      String nomenclature = valores[i+=1].trim();
                      String description = valores[i+=1].trim();
-                     double downLimit = valores[i+=1].trim();
-                     double upLimit = valores[i+=1].trim();
-                       //Create a new Variable object and add it to the Formula                     
-                      Variable variable = new Variable(name,nomenclature,description downLimit,upLimit);
+                     double downLimit = Double.parseDouble(valores[i+=1]);                    
+                     double upLimit = Double.parseDouble(valores[i+=1]);            
+                     
+                      /*Create a new Variable object and add it to the Formula*/
+                      Variable variable = new Variable(name,nomenclature,description,downLimit,upLimit);
                       variables.add(variable);
                                         
                                                 }
@@ -86,11 +88,6 @@ try {
                                             return formulas;
                                         }
           
-
-    
-	
-                        /*double coefficient = Double.parseDouble(variableDetails[1].trim());
-                        double minValue = Double.parseDouble(variableDetails[2].trim());
-                        double maxValue = Double.parseDouble(variableDetails[3].trim());*/
+            
                             
 }
