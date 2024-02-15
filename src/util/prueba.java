@@ -2,6 +2,7 @@ package util;
 
 import java.util.ArrayList;
 
+import exception.ErrorFieldException;
 import logic.DamSystem;
 import logic.Formula;
 import logic.Variable;
@@ -9,7 +10,7 @@ import util.FilesManagement;
 import util.Init;
 
 public class prueba {
-public static void main(String[] args) {
+public static void main(String[] args) throws ErrorFieldException {
     Init.init();
 FilesManagement.WriteFormulaToFile(DamSystem.getInstance().getFormulasFile());
 ArrayList<Formula> formulas = FilesManagement.CargandoFormulas(DamSystem.getInstance().getFormulasFile());
